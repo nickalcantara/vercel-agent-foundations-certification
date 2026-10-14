@@ -6,12 +6,15 @@ import type {
   BackOfficeSalesMeta,
   BackOfficeStockMeta,
   CartWithProducts,
-  CategorySlug,
   Category,
+  CategorySlug,
+  Order,
   PaginationMeta,
   Product,
   ProductSalesRow,
   Promotion,
+  RefundPreauthorization,
+  Return,
   StockEntry,
   StockInfo,
   StoreConfig,
@@ -19,9 +22,6 @@ import type {
   SupportTicketCategory,
   SupportTicketPriority,
   SupportTicketStatus,
-  Order,
-  RefundPreauthorization,
-  Return,
 } from "./types";
 
 const API_BASE_URL =
@@ -255,6 +255,7 @@ export async function getProducts(
 }
 
 export async function getProductById(idOrSlug: string): Promise<Product> {
+  console.log("[getProductById]", idOrSlug);
   return request<Product>(`/products/${encodeURIComponent(idOrSlug)}`, {
     next: {
       revalidate: DEFAULT_REVALIDATE,
